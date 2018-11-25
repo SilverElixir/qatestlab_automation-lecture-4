@@ -7,9 +7,11 @@
     <groupId>myprojects.automation.assignment4</groupId>
     <artifactId>assignment4</artifactId>
     <version>1.0</version>
-
     <build>
+        <!-- Source directory configuration -->
         <plugins>
+            <!-- Compiler plugin configures the java version to be usedfor compiling
+                the code -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -19,7 +21,7 @@
                     <target>8</target>
                 </configuration>
             </plugin>
-
+            <!-- Following plugin executes the testng tests -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -27,13 +29,14 @@
                 <configuration>
                     <!--ReportNG reporting framework may be connected here-->
                     <suiteXmlFiles>
-                        <suiteXmlFile>${project.build.testOutputDirectory}/testng.xml</suiteXmlFile>
+                        <suiteXmlFile>testng.xml</suiteXmlFile>
+                        <!--<suiteXmlFile>${project.build.testOutputDirectory}/testng.xml</suiteXmlFile>-->
                     </suiteXmlFiles>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-
+    <!-- Dependency libraries to include for compilation -->
     <dependencies>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>

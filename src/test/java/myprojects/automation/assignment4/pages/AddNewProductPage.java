@@ -2,6 +2,7 @@ package myprojects.automation.assignment4.pages;
 
 import myprojects.automation.assignment4.model.ProductData;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
@@ -9,6 +10,10 @@ import org.testng.Assert;
  * Created by lucky on 11/20/18.
  */
 public class AddNewProductPage extends BasicPage {
+
+    public AddNewProductPage(WebDriver driver) {
+        super(driver);
+    }
 
 //    final ProductData newProduct = ProductData.generate();
 

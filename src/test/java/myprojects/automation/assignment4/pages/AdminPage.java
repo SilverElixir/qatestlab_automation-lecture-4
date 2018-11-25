@@ -1,6 +1,7 @@
 package myprojects.automation.assignment4.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -11,6 +12,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 public class AdminPage extends BasicPage {
 
     WebElement catalogMenuItem = driver.findElement(By.id("subtab-AdminCatalog"));
+
+    public AdminPage(WebDriver driver) {
+        super(driver);
+    }
 
     public ProductPage selectProductsFromCatalogueMenu(){
         Actions builder = new Actions(driver);
@@ -23,7 +28,7 @@ public class AdminPage extends BasicPage {
                 .build().perform();
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("page-header-desc-configuration-add")));
-        return new ProductPage();
+        return new ProductPage(driver);
     }
 
 

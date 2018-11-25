@@ -1,6 +1,7 @@
 package myprojects.automation.assignment4.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 /**
@@ -8,10 +9,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
  */
 public class ProductPage extends BasicPage {
 
+    public ProductPage(WebDriver driver) {
+        super(driver);
+    }
+
     public AddNewProductPage clickOnAddNewProductBtn(){
         driver.findElement(By.id("page-header-desc-configuration-add")).click();
         wait.until(ExpectedConditions.presenceOfElementLocated(By.className("product-header")));
 
-        return new AddNewProductPage();
+        return new AddNewProductPage(driver);
     }
 }

@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
  */
 public abstract class BaseScript {
 
-    protected EventFiringWebDriver driver;
+    protected static EventFiringWebDriver driver;
 
     /**
      * Prepares {@link WebDriver} instance with timeout and browser window configurations.
@@ -26,13 +26,12 @@ public abstract class BaseScript {
      * creates {@link ChromeDriver} instance by default.
      *
      */
-    @BeforeClass
-    // TODO use parameters from pom.xml to pass required browser type
+    @Parameters("browser")
+    @BeforeTest
     public void setUp() {
-//    public void setUp(String browser ) {
-        driver = new EventFiringWebDriver(DriverFactory.getWebDriverInstance("chrome"));
-//        driver = new EventFiringWebDriver(getDriver(browser));
-        driver.register(new EventHandler());
+//    public void setUp(@Optional("chrome") String browser ) {
+        driver = new EventFiringWebDriver(DriverFactory.getWebDriverInstance("firefox"));
+//        driver.register(new EventHandler());
 
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
@@ -42,10 +41,25 @@ public abstract class BaseScript {
     /**
      * Closes driver instance after test class execution.
      */
-    @AfterClass
+    @AfterTest
     public void tearDown() {
         if (driver != null) {
             driver.quit();
         }
+    }
+
+    public static LoginPage openMainPage(){
+        Reporter.log("Open Login page");
+        driver.get(Properties.getBaseAdminUrl());
+
+        return new LoginPage(driver);
+    }
+
+    public static MainShopPage openShopWelcomePage(){
+        Reporter.log("Open Shop main page");
+        driver.get(Properties.getBaseUrl());
+//        DriverFactory.getWebDriverInstance("chrome").get(Properties.getBaseUrl());
+        // should I add up some kind of WAIT here - just to check main Shop page is fully loaded ??
+        return new MainShopPage(driver);
     }
 }

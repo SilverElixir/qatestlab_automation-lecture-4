@@ -2,6 +2,7 @@ package myprojects.automation.assignment4.pages.shop;
 
 import myprojects.automation.assignment4.pages.BasicPage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
 /**
@@ -9,6 +10,10 @@ import org.testng.Assert;
  */
 
 public class OneProductSelectedPage extends BasicPage {
+
+    public OneProductSelectedPage(WebDriver driver) {
+        super(driver);
+    }
 
     public OneProductSelectedPage verifyProductNameIsCorrect(String expectedProductName){
         String actualProductName = driver.findElement(By.cssSelector(".h1[itemprop='name']")).getText();
@@ -27,8 +32,6 @@ public class OneProductSelectedPage extends BasicPage {
     public OneProductSelectedPage verifyProductQtyIsCorrect(int expectedQty){
         String actualQtyRaw = driver.findElement(By.cssSelector(".product-quantities > span")).getText();
         String expectedQtyStr = String.valueOf(expectedQty) + " Товары";
-//        int spaceIndex = actualQtyRaw.indexOf("");
-//        int actualQty = Integer.parseInt(actualQtyRaw.substring(spaceIndex));
 
         Assert.assertEquals(actualQtyRaw, expectedQtyStr, "TBD - failure message");
         return this;

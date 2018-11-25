@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite thread-count="3" name="Suite" parallel="tests">
-    <test name="FirstTest" thread-count="5" parallel="methods" >
+<suite name="Parallel tests" parallel="tests" thread-count="2" >
+    <!-- First Test -->
+    <test name="Verify product creation on Chrome">
         <parameter name="browser" value="chrome"/>
         <classes>
-            <class name="FirstTest"/>
+            <class name="myprojects.automation.assignment4.tests.CreateProductTest"/>
         </classes>
-    </test> <!-- First Test -->
-    <test name="SecondTest" thread-count="5" parallel="methods" >
+    </test>
+    <!-- Second Test -->
+    <!-- https://howtodoinjava.com/testng/how-to-execute-testng-tests-with-maven-build/ -->
+    <test name="Verify product creation on Firefox">
+    <!--<test name="Verify product creation on Chrome" thread-count="2" parallel="methods" >-->
         <parameter name="browser" value="firefox"/>
         <classes>
-            <class name="SecondTest"/>
+            <class name="myprojects.automation.assignment4.tests.CreateProductTest"/>
         </classes>
-    </test> <!-- Second Test -->
-</suite> <!-- Suite -->
+    </test>
+</suite>

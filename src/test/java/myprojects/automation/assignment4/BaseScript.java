@@ -28,10 +28,15 @@ public abstract class BaseScript {
      */
     @Parameters("browser")
     @BeforeTest
-    public void setUp() {
-//    public void setUp(@Optional("chrome") String browser ) {
+    public void setUp(@Optional("chrome") String browser ) {
         driver = new EventFiringWebDriver(DriverFactory.getWebDriverInstance("firefox"));
 //        driver.register(new EventHandler());
+        /**
+         * I had to comment above line since its fail the test on "webElement.clear()"
+         * EventHandler.java, line 92
+         * AddNewProductPage.java, line 28
+         * and I didn't have enough time to debug it properly :(
+         */
 
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
@@ -58,8 +63,7 @@ public abstract class BaseScript {
     public static MainShopPage openShopWelcomePage(){
         Reporter.log("Open Shop main page");
         driver.get(Properties.getBaseUrl());
-//        DriverFactory.getWebDriverInstance("chrome").get(Properties.getBaseUrl());
-        // should I add up some kind of WAIT here - just to check main Shop page is fully loaded ??
+
         return new MainShopPage(driver);
     }
 }

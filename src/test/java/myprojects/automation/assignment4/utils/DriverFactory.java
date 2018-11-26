@@ -28,17 +28,17 @@ public class DriverFactory{
         if(webDriver == null) {
             switch (browser) {
                 case "firefox":
-                    System.setProperty("webdriver.gecko.driver", getResource("/mac/geckodriver"));
-//                System.setProperty("webdriver.gecko.driver", getResource("/win/geckodriver.exe"));
+//                    System.setProperty("webdriver.gecko.driver", getResource("/mac/geckodriver"));
+                System.setProperty("webdriver.gecko.driver", getResource("/win/geckodriver.exe"));
                     return new FirefoxDriver();
                 case "ie":
                 case "internet explorer":
-                    System.setProperty("webdriver.ie.driver", getResource("/IEDriverServer.exe"));
+                    System.setProperty("webdriver.ie.driver", getResource("/win/IEDriverServer.exe"));
                     return new InternetExplorerDriver();
                 case "chrome":
                 default:
-                    System.setProperty("webdriver.chrome.driver", getResource("/mac/chromedriver"));
-//                System.setProperty("webdriver.chrome.driver", getResource("/win/chromedriver.exe"));
+//                    System.setProperty("webdriver.chrome.driver", getResource("/mac/chromedriver"));
+                System.setProperty("webdriver.chrome.driver", getResource("/win/chromedriver.exe"));
                     return new ChromeDriver();
             }
         }
